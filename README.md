@@ -17,6 +17,21 @@ The following result will appear
 
 ![lable](sampled_images_and_label.png)
 
+# Requirement
+You only need to save torch>=0.13.1 cuda>=11.7, python>=3.7, there are no specific requirements for other packages
+```
+pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu117
+```
+
+
+```
+torch==1.13.1
+torchvision==0.14.1
+tqdm==4.64.1
+einops==0.6.0
+matplotlib==3.5.3
+numpy==1.21.6
+```
 
 
 # TO DO
