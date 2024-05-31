@@ -95,19 +95,3 @@ class Get_tager_sample(Dataset):
 
         return f[:,:8,...],f[:,8:16,...]
 
-path = "/media/ps/code/validation"
-s = tqdm(os.listdir(path))
-for step,i in enumerate (s):
-
-    x = numpy.load(os.path.join(path, i)).astype(numpy.uint8)
-    f = []
-#
-    for s in range(24):
-        z = x[s,0,...]
-        z = (numpy.clip(z,-1,10)*22.5).astype(numpy.uint8)
-        z = cv2.cvtColor(z,cv2.COLOR_GRAY2RGB)
-       
-        z = Image.fromarray(cv2.cvtColor(z,cv2.COLOR_BGR2RGB))
-        f.append(z)
-    f = numpy.stack(f)
-    imageio.mimwrite("/media/ps/code/validation_grey/"+i[:-3]+"gif",f)

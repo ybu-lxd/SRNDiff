@@ -11,7 +11,7 @@ from multi_train_utils.distributed_utils import is_main_process
 from utils import *
 import einops
 import logging
-
+from tqdm import tqdm
 from torch.utils.tensorboard import SummaryWriter
 
 logging.basicConfig(format="%(asctime)s - %(levelname)s: %(message)s", level=logging.INFO, datefmt="%I:%M:%S")
@@ -131,7 +131,7 @@ class Diffusion:
         return x
 
 
-    def sample_condition_decoder_(self, model, n,image,label,in_ch=4):
+    def sample_condition_decoder_(self, model, n,image,in_ch=4):
         logging.info(f"Sampling {n} new images....")
         model.eval()
 
@@ -140,7 +140,7 @@ class Diffusion:
             x = torch.randn((n, in_ch, self.img_size, self.img_size)).to(self.device)
             # print(images.shape)
             
-            for i in reversed(range(1, self.noise_steps)):
+            for i in tqdm(reversed(range(1, self.noise_steps))):
                 t = (torch.ones(n) * i).long().to(self.device)
                 # print(x.shape)
                 # predicted_noise = model(torch.unsqueeze(x,dim=1), t,images)
@@ -155,8 +155,8 @@ class Diffusion:
                 else:
                     noise = torch.zeros_like(x)
                 x = 1 / torch.sqrt(alpha) * (x - ((1 - alpha) / (torch.sqrt(1 - alpha_hat))) * predicted_noise) + torch.sqrt(beta) * noise
-
-        model.train()
+        x = x.cpu().detach().numpy()
+        # model.train()
         # x = (x.clamp(-1, 1) + 1) / 2
         # x = (x * 255).type(torch.uint8)
         # x = x*0.8913+0.4202
