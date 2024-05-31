@@ -1,6 +1,12 @@
 # SRNDiff
+## Abstract
+Diffusion models are widely used in image generation because they can generate high-quality and realistic samples. This is in contrast to generative adversarial networks (GANs) and variational autoencoders (VAEs), which have some limitations in terms of image quality.We introduce the diffusion model to the precipitation forecasting task and propose a short-term precipitation nowcasting with condition diffusion model based on historical observational data, which is referred to as SRNDiff. By incorporating an additional conditional decoder module in the denoising process, SRNDiff achieves end-to-end conditional rainfall prediction. SRNDiff is composed of two networks: a denoising network and a conditional Encoder network. The conditional network is composed of multiple independent UNet networks. These networks extract conditional feature maps at different resolutions, providing accurate conditional information that guides the diffusion model for conditional generation.SRNDiff surpasses GANs in terms of prediction accuracy, although it requires more computational resources.The SRNDiff model exhibits higher stability and efficiency during training than GANs-based approaches, and generates high-quality precipitation distribution samples that better reflect future actual precipitation conditions. This fully validates the advantages and potential of diffusion models in precipitation forecasting, providing new insights for enhancing rainfall prediction.
 
-# how to use
+
+
+
+
+# How to use
 
 
 
@@ -8,7 +14,7 @@
 python sample.py
 ```
 
-The weights can be accessed at the following address:
+The pre-weights can be accessed at the following address:
 https://drive.google.com/file/d/1sZsT_Qe0_9kmXIfT8fRuZ9Rj5wY37Bbr/view?usp=drive_link
 
 
